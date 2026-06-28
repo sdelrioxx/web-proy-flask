@@ -23,11 +23,16 @@ def prediccion():
     if request.method == 'POST':
         try:
             datos = {
-                'platform': request.form.get('platform'),
-                'genre': request.form.get('genre'),
-                'year': request.form.get('year'),
-                'na_sales': request.form.get('na_sales'),
-                'eu_sales': request.form.get('eu_sales'),
+                'Year_of_Release': request.form.get('year_of_release'),
+                'Platform_encoded': request.form.get('platform_encoded'),
+                'Genre_encoded': request.form.get('genre_encoded'),
+                'Publisher_encoded': request.form.get('publisher_encoded'),
+                'Critic_Score': request.form.get('critic_score'),
+                'Critic_Count': request.form.get('critic_count'),
+                'User_Score': request.form.get('user_score'),
+                'User_Count': request.form.get('user_count'),
+                'has_critic_score': request.form.get('has_critic_score'),
+                'has_user_score': request.form.get('has_user_score'),
             }
 
             resultado = make_prediction(datos)
