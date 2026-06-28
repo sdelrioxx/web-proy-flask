@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from utils.predict import make_prediction
+from utils.predict import make_prediction, get_form_options
 import os
 
 app = Flask(__name__)
@@ -20,13 +20,16 @@ def prediccion():
     resultado = None
     error = None
 
+    # Opciones para los select del formulario
+    opciones = get_form_options()
+
     if request.method == 'POST':
         try:
             datos = {
                 'Year_of_Release': request.form.get('year_of_release'),
-                'Platform_encoded': request.form.get('platform_encoded'),
-                'Genre_encoded': request.form.get('genre_encoded'),
-                'Publisher_encoded': request.form.get('publisher_encoded'),
+                'Platform': request.form.get('platform'),
+                'Genre': request.form.get('genre'),
+                'Publisher': request.form.get('publisher'),
                 'Critic_Score': request.form.get('critic_score'),
                 'Critic_Count': request.form.get('critic_count'),
                 'User_Score': request.form.get('user_score'),
@@ -43,7 +46,8 @@ def prediccion():
     return render_template(
         'prediccion.html',
         resultado=resultado,
-        error=error
+        error=error,
+        opciones=opciones
     )
 
 
