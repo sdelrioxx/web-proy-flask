@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}Predicción · GameSales ML{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <h1>Predice las Ventas</h1>
+    <p class="page-sub">Ingresa los datos del videojuego y el modelo estimará sus ventas globales.</p>
+</section>
+
+<section class="prediccion-section">
+    <div class="form-container">
+        <form method="POST" action="/prediccion">
+
+            <div class="form-group">
+                <label for="platform">Plataforma</label>
+                <select id="platform" name="platform" required>
+                    <option value="">Selecciona una plataforma</option>
+                    <option value="2600">2600</option>
+                    <option value="SAT">SAT</option>
+                    <option value="3DS">3DS</option>
+                    <option value="DC">DC</option>
+                    <option value="DS">DS</option>
+                    <option value="GB">GB</option>
+                    <option value="GBA">GBA</option>
+                    <option value="GC">GC</option>
+                    <option value="GEN">GEN</option>
+                    <option value="N64">N64</option>
+                    <option value="NES">NES</option>
+                    <option value="NG">NG</option>
+                    <option value="PC">PC</option>
+                    <option value="PS">PS</option>
+                    <option value="PS2">PS2</option>
+                    <option value="PS3">PS3</option>
+                    <option value="PS4">PS4</option>
+                    <option value="PSP">PSP</option>
+                    <option value="PSV">PSV</option>
+                    <option value="SCD">SCD</option>
+                    <option value="SNES">SNES</option>
+                    <option value="Wii">Wii</option>
+                    <option value="WiiU">WiiU</option>
+                    <option value="WS">WS</option>
+                    <option value="X360">X360</option>
+                    <option value="XB">XB</option>
+                    <option value="XOne">XOne</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="genre">Género</label>
+                <select id="genre" name="genre" required>
+                    <option value="">Selecciona un género</option>
+                    <option value="Action">Acción</option>
+                    <option value="Adventure">Aventura</option>
+                    <option value="Fighting">Pelea</option>
+                    <option value="Misc">Misceláneo</option>
+                    <option value="Platform">Plataformas</option>
+                    <option value="Puzzle">Puzzle</option>
+                    <option value="Racing">Carreras</option>
+                    <option value="Role-Playing">RPG</option>
+                    <option value="Shooter">Shooter</option>
+                    <option value="Simulation">Simulación</option>
+                    <option value="Sports">Deportes</option>
+                    <option value="Strategy">Estrategia</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="year">Año de lanzamiento</label>
+                <input type="number" id="year" name="year" min="1980" max="2030" placeholder="Entre 1980 y 2016" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="na_sales">Otra variable relevante para predecir</label>
+                    <input type="number" id="na_sales" name="na_sales" step="0.01" min="0" placeholder="Ej: xxx" required>
+                </div>
+                <div class="form-group">
+                    <label for="eu_sales">Otra variable relevante</label>
+                    <input type="number" id="eu_sales" name="eu_sales" step="0.01" min="0" placeholder="Ej: xxx" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary btn-full">Calcular predicción</button>
+        </form>
+    </div>
+
+    {% if resultado %}
+    <div class="resultado-box">
+        <p class="resultado-label">Ventas globales estimadas</p>
+        <p class="resultado-valor">{{ resultado }}</p>
+        <p class="resultado-hint">millones de unidades vendidas</p>
+    </div>
+    {% endif %}
+
+</section>
+
+{% endblock %}

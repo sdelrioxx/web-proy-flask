@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Inicio · GameSales ML{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="hero-inner">
+        <h1>Predicción de Ventas<br>de Videojuegos</h1>
+        <p class="hero-sub">Aplicando modelos de Machine Learning para predecir ventas globales a partir de datos históricos de la industria del videojuego.</p>
+        <div class="hero-actions">
+            <a href="/prediccion" class="btn-primary">Hacer una predicción</a>
+            <a href="/modelos" class="btn-secondary">Ver modelos</a>
+        </div>
+</section>
+
+<section class="cards-section">
+    <h2 class="section-title">¿Qué hace esta web?</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>Explora los datos</h3>
+            <p>Visualiza el análisis exploratorio del dataset de ventas de videojuegos: tendencias por región, plataforma y género.</p>
+        </div>
+        <div class="card">
+            <h3>Compara modelos</h3>
+            <p>Revisa las métricas de rendimiento de cada modelo predictivo entrenado y cómo se comparan entre sí.</p>
+        </div>
+        <div class="card">
+            <h3>Predice ventas</h3>
+            <p>Ingresa los datos de un videojuego y obtén una estimación de sus ventas globales usando el mejor modelo.</p>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Modelos · GameSales ML{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <h1>Modelos Candidatos</h1>
+    <p class="page-sub">Aquí se describen los modelos entrenados, sus métricas y el criterio de selección del modelo final.</p>
+</section>
+
+<section class="modelos-section">
+    <div class="modelo-card">
+        <div class="modelo-header">
+            <span class="modelo-badge">Modelo A</span>
+            <h2 class="modelo-nombre">[ Por definir ]</h2>
+        </div>
+        <p class="modelo-desc">Descripción del modelo y justificación de su elección. Completar cuando esté entrenado.</p>
+        <div class="metricas">
+            <div class="metrica">
+                <span class="metrica-label">RMSE</span>
+                <span class="metrica-val">—</span>
+            </div>
+            <div class="metrica">
+                <span class="metrica-label">R²</span>
+                <span class="metrica-val">—</span>
+            </div>
+            <div class="metrica">
+                <span class="metrica-label">MAE</span>
+                <span class="metrica-val">—</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="modelo-card">
+        <div class="modelo-header">
+            <span class="modelo-badge">Modelo B</span>
+            <h2 class="modelo-nombre">[ Por definir ]</h2>
+        </div>
+        <p class="modelo-desc">Descripción del modelo y justificación de su elección. Completar cuando esté entrenado.</p>
+        <div class="metricas">
+            <div class="metrica">
+                <span class="metrica-label">RMSE</span>
+                <span class="metrica-val">—</span>
+            </div>
+            <div class="metrica">
+                <span class="metrica-label">R²</span>
+                <span class="metrica-val">—</span>
+            </div>
+            <div class="metrica">
+                <span class="metrica-label">MAE</span>
+                <span class="metrica-val">—</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ganador-section">
+    <h2>Modelo Final</h2>
+    <p>El modelo seleccionado es .... (el q obtenga mejores métricas en el conjunto de prueba) Esta sección se completará con el análisis comparativo final.</p>
+</section>
+
+{% endblock %}
