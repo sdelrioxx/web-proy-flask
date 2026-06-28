@@ -747,3 +747,296 @@ main { flex: 1; }
         width: 100%;
     }
 }
+/* ============================= */
+/* PÁGINA DE MODELOS */
+/* ============================= */
+
+.models-section {
+    width: 100%;
+    min-height: 100vh;
+    padding: 55px 6%;
+    background:
+        radial-gradient(circle at top left, rgba(124, 58, 237, 0.18), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(15, 108, 189, 0.16), transparent 30%),
+        linear-gradient(135deg, #080b12 0%, #101522 45%, #151827 100%);
+    color: #f8fafc;
+}
+
+.models-header {
+    max-width: 950px;
+    margin: 0 auto 38px auto;
+    text-align: center;
+}
+
+.models-header h1 {
+    margin: 0;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    line-height: 1.1;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+}
+
+.models-header p {
+    max-width: 760px;
+    margin: 18px auto 0 auto;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #b8c2d6;
+}
+
+.models-summary {
+    max-width: 1100px;
+    margin: 0 auto 34px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.summary-item {
+    padding: 20px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(148, 163, 184, 0.20);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.20);
+}
+
+.summary-item span {
+    display: block;
+    margin-bottom: 8px;
+    color: #94a3b8;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.summary-item strong {
+    color: #ffffff;
+    font-size: 1.1rem;
+}
+
+.models-grid {
+    max-width: 1250px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.model-card {
+    padding: 28px;
+    border-radius: 26px;
+    background: rgba(15, 23, 42, 0.78);
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    box-shadow: 0 24px 55px rgba(0, 0, 0, 0.24);
+    backdrop-filter: blur(14px);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.model-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(167, 139, 250, 0.55);
+    box-shadow: 0 28px 65px rgba(0, 0, 0, 0.32);
+}
+
+.selected-model {
+    border-color: rgba(124, 58, 237, 0.75);
+    box-shadow: 0 28px 70px rgba(124, 58, 237, 0.18);
+}
+
+.model-badge {
+    display: inline-block;
+    padding: 7px 13px;
+    margin-bottom: 16px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.final-badge {
+    background: linear-gradient(135deg, #0f6cbd, #7c3aed);
+}
+
+.model-card h2 {
+    margin: 0 0 14px 0;
+    color: #ffffff;
+    font-size: 1.55rem;
+}
+
+.model-card > p {
+    color: #b8c2d6;
+    line-height: 1.65;
+    margin-bottom: 22px;
+}
+
+.model-detail {
+    padding: 18px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    margin-bottom: 22px;
+}
+
+.model-detail h3 {
+    margin: 0 0 8px 0;
+    color: #e9d5ff;
+    font-size: 1rem;
+}
+
+.model-detail p {
+    margin: 0;
+    color: #aab6ca;
+    line-height: 1.6;
+    font-size: 0.92rem;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.metric-box {
+    padding: 16px 10px;
+    border-radius: 18px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.055);
+    border: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+.metric-box span {
+    display: block;
+    margin-bottom: 8px;
+    color: #94a3b8;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+}
+
+.metric-box strong {
+    color: #ffffff;
+    font-size: 1.05rem;
+}
+
+.cv-text {
+    margin: 18px 0 0 0 !important;
+    padding-top: 16px;
+    border-top: 1px solid rgba(148, 163, 184, 0.18);
+    color: #c4b5fd !important;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.comparison-section {
+    max-width: 1250px;
+    margin: 34px auto 0 auto;
+    padding: 30px;
+    border-radius: 26px;
+    background: rgba(15, 23, 42, 0.78);
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    box-shadow: 0 24px 55px rgba(0, 0, 0, 0.24);
+}
+
+.comparison-section h2 {
+    margin: 0 0 20px 0;
+    color: #ffffff;
+    font-size: 1.6rem;
+}
+
+.comparison-table {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.comparison-table table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 760px;
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.comparison-table th {
+    color: #e9d5ff;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.comparison-table td {
+    color: #cbd5e1;
+    line-height: 1.5;
+}
+
+.best-row {
+    background: rgba(124, 58, 237, 0.12);
+}
+
+.best-row td {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.final-model-card {
+    max-width: 1250px;
+    margin: 34px auto 0 auto;
+    padding: 34px;
+    border-radius: 26px;
+    background:
+        linear-gradient(135deg, rgba(15, 108, 189, 0.16), rgba(124, 58, 237, 0.16)),
+        rgba(15, 23, 42, 0.86);
+    border: 1px solid rgba(167, 139, 250, 0.55);
+    box-shadow: 0 28px 70px rgba(124, 58, 237, 0.16);
+}
+
+.final-model-card h2 {
+    margin: 0 0 16px 0;
+    color: #ffffff;
+    font-size: 1.65rem;
+}
+
+.final-model-card p {
+    color: #cbd5e1;
+    line-height: 1.75;
+    margin: 0 0 14px 0;
+}
+
+/* ============================= */
+/* RESPONSIVE MODELOS */
+/* ============================= */
+
+@media (max-width: 1100px) {
+    .models-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .models-summary {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 680px) {
+    .models-section {
+        padding: 35px 4%;
+    }
+
+    .model-card,
+    .comparison-section,
+    .final-model-card {
+        padding: 24px;
+        border-radius: 22px;
+    }
+
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+}
