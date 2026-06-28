@@ -1,98 +1,127 @@
 {% extends "base.html" %}
-{% block title %}Predicción · GameSales ML{% endblock %}
+
+{% block title %}Predicción de Ventas{% endblock %}
 
 {% block content %}
+<section class="prediction-section">
+    <h1>Predicción de ventas globales</h1>
 
-<section class="page-header">
-    <h1>Predice las Ventas</h1>
-    <p class="page-sub">Ingresa los datos del videojuego y el modelo estimará sus ventas globales.</p>
-</section>
+    <p>
+        Complete las variables requeridas por el modelo para estimar las ventas globales
+        de un videojuego. La predicción se entrega en millones de unidades vendidas.
+    </p>
 
-<section class="prediccion-section">
-    <div class="form-container">
-        <form method="POST" action="/prediccion">
+    <form method="POST" action="{{ url_for('prediccion') }}" class="prediction-form">
 
-            <div class="form-group">
-                <label for="platform">Plataforma</label>
-                <select id="platform" name="platform" required>
-                    <option value="">Selecciona una plataforma</option>
-                    <option value="2600">2600</option>
-                    <option value="SAT">SAT</option>
-                    <option value="3DS">3DS</option>
-                    <option value="DC">DC</option>
-                    <option value="DS">DS</option>
-                    <option value="GB">GB</option>
-                    <option value="GBA">GBA</option>
-                    <option value="GC">GC</option>
-                    <option value="GEN">GEN</option>
-                    <option value="N64">N64</option>
-                    <option value="NES">NES</option>
-                    <option value="NG">NG</option>
-                    <option value="PC">PC</option>
-                    <option value="PS">PS</option>
-                    <option value="PS2">PS2</option>
-                    <option value="PS3">PS3</option>
-                    <option value="PS4">PS4</option>
-                    <option value="PSP">PSP</option>
-                    <option value="PSV">PSV</option>
-                    <option value="SCD">SCD</option>
-                    <option value="SNES">SNES</option>
-                    <option value="Wii">Wii</option>
-                    <option value="WiiU">WiiU</option>
-                    <option value="WS">WS</option>
-                    <option value="X360">X360</option>
-                    <option value="XB">XB</option>
-                    <option value="XOne">XOne</option>
-                </select>
-            </div>
+        <label for="year_of_release">Año de lanzamiento</label>
+        <input 
+            type="number" 
+            id="year_of_release" 
+            name="year_of_release" 
+            min="1970" 
+            max="2030" 
+            step="1" 
+            required
+            placeholder="Ej: 2015">
 
-            <div class="form-group">
-                <label for="genre">Género</label>
-                <select id="genre" name="genre" required>
-                    <option value="">Selecciona un género</option>
-                    <option value="Action">Acción</option>
-                    <option value="Adventure">Aventura</option>
-                    <option value="Fighting">Pelea</option>
-                    <option value="Misc">Misceláneo</option>
-                    <option value="Platform">Plataformas</option>
-                    <option value="Puzzle">Puzzle</option>
-                    <option value="Racing">Carreras</option>
-                    <option value="Role-Playing">RPG</option>
-                    <option value="Shooter">Shooter</option>
-                    <option value="Simulation">Simulación</option>
-                    <option value="Sports">Deportes</option>
-                    <option value="Strategy">Estrategia</option>
-                </select>
-            </div>
+        <label for="platform_encoded">Plataforma codificada</label>
+        <input 
+            type="number" 
+            id="platform_encoded" 
+            name="platform_encoded" 
+            step="1" 
+            required
+            placeholder="Ej: 12">
 
-            <div class="form-group">
-                <label for="year">Año de lanzamiento</label>
-                <input type="number" id="year" name="year" min="1980" max="2030" placeholder="Entre 1980 y 2016" required>
-            </div>
+        <label for="genre_encoded">Género codificado</label>
+        <input 
+            type="number" 
+            id="genre_encoded" 
+            name="genre_encoded" 
+            step="1" 
+            required
+            placeholder="Ej: 0">
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="na_sales">Otra variable relevante para predecir</label>
-                    <input type="number" id="na_sales" name="na_sales" step="0.01" min="0" placeholder="Ej: xxx" required>
-                </div>
-                <div class="form-group">
-                    <label for="eu_sales">Otra variable relevante</label>
-                    <input type="number" id="eu_sales" name="eu_sales" step="0.01" min="0" placeholder="Ej: xxx" required>
-                </div>
-            </div>
+        <label for="publisher_encoded">Editora codificada</label>
+        <input 
+            type="number" 
+            id="publisher_encoded" 
+            name="publisher_encoded" 
+            step="1" 
+            required
+            placeholder="Ej: 45">
 
-            <button type="submit" class="btn-primary btn-full">Calcular predicción</button>
-        </form>
-    </div>
+        <label for="critic_score">Puntaje de críticos</label>
+        <input 
+            type="number" 
+            id="critic_score" 
+            name="critic_score" 
+            min="0" 
+            max="100" 
+            step="0.1" 
+            required
+            placeholder="Ej: 82">
+
+        <label for="critic_count">Cantidad de críticas</label>
+        <input 
+            type="number" 
+            id="critic_count" 
+            name="critic_count" 
+            min="0" 
+            step="1" 
+            required
+            placeholder="Ej: 35">
+
+        <label for="user_score">Puntaje de usuarios</label>
+        <input 
+            type="number" 
+            id="user_score" 
+            name="user_score" 
+            min="0" 
+            max="10" 
+            step="0.1" 
+            required
+            placeholder="Ej: 8.2">
+
+        <label for="user_count">Cantidad de reseñas de usuarios</label>
+        <input 
+            type="number" 
+            id="user_count" 
+            name="user_count" 
+            min="0" 
+            step="1" 
+            required
+            placeholder="Ej: 120">
+
+        <label for="has_critic_score">¿Tiene puntaje de críticos?</label>
+        <select id="has_critic_score" name="has_critic_score" required>
+            <option value="">Seleccione una opción</option>
+            <option value="1">Sí</option>
+            <option value="0">No</option>
+        </select>
+
+        <label for="has_user_score">¿Tiene puntaje de usuarios?</label>
+        <select id="has_user_score" name="has_user_score" required>
+            <option value="">Seleccione una opción</option>
+            <option value="1">Sí</option>
+            <option value="0">No</option>
+        </select>
+
+        <button type="submit">Predecir ventas globales</button>
+    </form>
 
     {% if resultado %}
-    <div class="resultado-box">
-        <p class="resultado-label">Ventas globales estimadas</p>
-        <p class="resultado-valor">{{ resultado }}</p>
-        <p class="resultado-hint">millones de unidades vendidas</p>
-    </div>
+        <div class="resultado">
+            <h2>Resultado de la predicción</h2>
+            <p>{{ resultado }}</p>
+        </div>
     {% endif %}
 
+    {% if error %}
+        <div class="error">
+            <h2>Error</h2>
+            <p>{{ error }}</p>
+        </div>
+    {% endif %}
 </section>
-
 {% endblock %}
