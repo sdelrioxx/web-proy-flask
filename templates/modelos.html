@@ -1,62 +1,209 @@
 {% extends "base.html" %}
-{% block title %}Modelos · GameSales ML{% endblock %}
+
+{% block title %}Modelos Candidatos{% endblock %}
 
 {% block content %}
+<section class="models-section">
 
-<section class="page-header">
-    <h1>Modelos Candidatos</h1>
-    <p class="page-sub">Aquí se describen los modelos entrenados, sus métricas y el criterio de selección del modelo final.</p>
-</section>
+    <div class="models-header">
+        <h1>Modelos Candidatos</h1>
+        <p>
+            En esta sección se presentan los modelos entrenados para predecir las ventas
+            globales de videojuegos. La comparación se realiza utilizando RMSE, MAE y R²
+            sobre el conjunto de prueba.
+        </p>
+    </div>
 
-<section class="modelos-section">
-    <div class="modelo-card">
-        <div class="modelo-header">
-            <span class="modelo-badge">Modelo A</span>
-            <h2 class="modelo-nombre">[ Por definir ]</h2>
+    <div class="models-summary">
+        <div class="summary-item">
+            <span>Variable objetivo</span>
+            <strong>log_Global_Sales</strong>
         </div>
-        <p class="modelo-desc">Descripción del modelo y justificación de su elección. Completar cuando esté entrenado.</p>
-        <div class="metricas">
-            <div class="metrica">
-                <span class="metrica-label">RMSE</span>
-                <span class="metrica-val">—</span>
-            </div>
-            <div class="metrica">
-                <span class="metrica-label">R²</span>
-                <span class="metrica-val">—</span>
-            </div>
-            <div class="metrica">
-                <span class="metrica-label">MAE</span>
-                <span class="metrica-val">—</span>
-            </div>
+        <div class="summary-item">
+            <span>Tipo de problema</span>
+            <strong>Regresión</strong>
+        </div>
+        <div class="summary-item">
+            <span>Modelo seleccionado</span>
+            <strong>XGBoost</strong>
         </div>
     </div>
 
-    <div class="modelo-card">
-        <div class="modelo-header">
-            <span class="modelo-badge">Modelo B</span>
-            <h2 class="modelo-nombre">[ Por definir ]</h2>
-        </div>
-        <p class="modelo-desc">Descripción del modelo y justificación de su elección. Completar cuando esté entrenado.</p>
-        <div class="metricas">
-            <div class="metrica">
-                <span class="metrica-label">RMSE</span>
-                <span class="metrica-val">—</span>
+    <div class="models-grid">
+
+        <article class="model-card">
+            <div class="model-badge">Modelo A</div>
+            <h2>Regresión Lineal</h2>
+
+            <p>
+                Modelo base utilizado como punto de comparación. Asume una relación lineal
+                entre las variables explicativas y las ventas globales del videojuego.
+            </p>
+
+            <div class="model-detail">
+                <h3>Rol dentro del análisis</h3>
+                <p>
+                    Sirve como baseline para evaluar si modelos más complejos logran mejorar
+                    la capacidad predictiva. Su principal limitación es que no captura bien
+                    relaciones no lineales entre plataforma, género, editora y ventas.
+                </p>
             </div>
-            <div class="metrica">
-                <span class="metrica-label">R²</span>
-                <span class="metrica-val">—</span>
+
+            <div class="metrics-grid">
+                <div class="metric-box">
+                    <span>RMSE</span>
+                    <strong>0.3582</strong>
+                </div>
+                <div class="metric-box">
+                    <span>MAE</span>
+                    <strong>0.2307</strong>
+                </div>
+                <div class="metric-box">
+                    <span>R²</span>
+                    <strong>0.2226</strong>
+                </div>
             </div>
-            <div class="metrica">
-                <span class="metrica-label">MAE</span>
-                <span class="metrica-val">—</span>
+
+            <p class="cv-text">
+                Validación cruzada R²: 0.2493 ± 0.0176
+            </p>
+        </article>
+
+        <article class="model-card">
+            <div class="model-badge">Modelo B</div>
+            <h2>Random Forest</h2>
+
+            <p>
+                Modelo basado en un conjunto de árboles de decisión. Permite capturar
+                relaciones no lineales y combinaciones complejas entre las variables.
+            </p>
+
+            <div class="model-detail">
+                <h3>Rol dentro del análisis</h3>
+                <p>
+                    Mejora considerablemente frente a la Regresión Lineal, ya que puede
+                    modelar interacciones entre variables como plataforma, género, editora,
+                    puntuaciones y cantidad de reseñas.
+                </p>
             </div>
+
+            <div class="metrics-grid">
+                <div class="metric-box">
+                    <span>RMSE</span>
+                    <strong>0.2930</strong>
+                </div>
+                <div class="metric-box">
+                    <span>MAE</span>
+                    <strong>0.1766</strong>
+                </div>
+                <div class="metric-box">
+                    <span>R²</span>
+                    <strong>0.4799</strong>
+                </div>
+            </div>
+
+            <p class="cv-text">
+                Validación cruzada R²: 0.4827 ± 0.0072
+            </p>
+        </article>
+
+        <article class="model-card selected-model">
+            <div class="model-badge final-badge">Modelo C</div>
+            <h2>XGBoost</h2>
+
+            <p>
+                Modelo de gradient boosting basado en árboles. Construye modelos de forma
+                secuencial, corrigiendo los errores de los árboles anteriores.
+            </p>
+
+            <div class="model-detail">
+                <h3>Rol dentro del análisis</h3>
+                <p>
+                    Fue el modelo con mejor desempeño general, obteniendo el menor error
+                    y el mayor R² en el conjunto de prueba. Por esta razón, fue seleccionado
+                    como modelo final para la aplicación web.
+                </p>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-box">
+                    <span>RMSE</span>
+                    <strong>0.2800</strong>
+                </div>
+                <div class="metric-box">
+                    <span>MAE</span>
+                    <strong>0.1708</strong>
+                </div>
+                <div class="metric-box">
+                    <span>R²</span>
+                    <strong>0.5250</strong>
+                </div>
+            </div>
+
+            <p class="cv-text">
+                Validación cruzada R²: 0.5276 ± 0.0109
+            </p>
+        </article>
+
+    </div>
+
+    <div class="comparison-section">
+        <h2>Comparación general</h2>
+
+        <div class="comparison-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Modelo</th>
+                        <th>RMSE</th>
+                        <th>MAE</th>
+                        <th>R²</th>
+                        <th>Conclusión</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Regresión Lineal</td>
+                        <td>0.3582</td>
+                        <td>0.2307</td>
+                        <td>0.2226</td>
+                        <td>Modelo base, pero con bajo poder predictivo.</td>
+                    </tr>
+                    <tr>
+                        <td>Random Forest</td>
+                        <td>0.2930</td>
+                        <td>0.1766</td>
+                        <td>0.4799</td>
+                        <td>Mejora relevante al capturar relaciones no lineales.</td>
+                    </tr>
+                    <tr class="best-row">
+                        <td>XGBoost</td>
+                        <td>0.2800</td>
+                        <td>0.1708</td>
+                        <td>0.5250</td>
+                        <td>Mejor desempeño, seleccionado como modelo final.</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-</section>
 
-<section class="ganador-section">
-    <h2>Modelo Final</h2>
-    <p>El modelo seleccionado es .... (el q obtenga mejores métricas en el conjunto de prueba) Esta sección se completará con el análisis comparativo final.</p>
-</section>
+    <div class="final-model-card">
+        <h2>Modelo Final Seleccionado: XGBoost</h2>
 
+        <p>
+            El modelo seleccionado para la aplicación fue XGBoost, ya que obtuvo el mejor
+            desempeño en las métricas evaluadas. En comparación con los otros modelos,
+            presentó el menor RMSE, el menor MAE y el mayor R², lo que indica una mejor
+            capacidad para aproximar las ventas globales de videojuegos.
+        </p>
+
+        <p>
+            Además, XGBoost es adecuado para este problema porque puede capturar relaciones
+            no lineales entre las variables del mercado de videojuegos, como la plataforma,
+            el género, la editora, el año de lanzamiento y las puntuaciones de crítica y usuarios.
+        </p>
+    </div>
+
+</section>
 {% endblock %}
