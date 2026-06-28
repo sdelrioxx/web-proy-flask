@@ -3,125 +3,199 @@
 {% block title %}Predicción de Ventas{% endblock %}
 
 {% block content %}
-<section class="prediction-section">
-    <h1>Predicción de ventas globales</h1>
+<section class="prediction-page">
 
-    <p>
-        Complete las variables requeridas por el modelo para estimar las ventas globales
-        de un videojuego. La predicción se entrega en millones de unidades vendidas.
-    </p>
+    <div class="prediction-hero">
+        <div class="hero-badge">Modelo de Machine Learning</div>
+        <h1>Predicción de ventas globales de videojuegos</h1>
+        <p>
+            Complete la información del videojuego para estimar sus ventas globales.
+            El modelo utiliza variables históricas como plataforma, género, editora,
+            año de lanzamiento y puntuaciones de crítica y usuarios.
+        </p>
+    </div>
 
-    <form method="POST" action="{{ url_for('prediccion') }}" class="prediction-form">
+    <div class="prediction-layout">
 
-        <label for="year_of_release">Año de lanzamiento</label>
-        <input 
-            type="number" 
-            id="year_of_release" 
-            name="year_of_release" 
-            min="1970" 
-            max="2030" 
-            step="1" 
-            required
-            placeholder="Ej: 2015">
+        <div class="prediction-info-card">
+            <h2>Variables del modelo</h2>
+            <p>
+                El formulario utiliza nombres reales para facilitar el uso. Internamente,
+                la aplicación transforma plataforma, género y editora a los códigos
+                numéricos que necesita el modelo.
+            </p>
 
-        <label for="platform_encoded">Plataforma codificada</label>
-        <input 
-            type="number" 
-            id="platform_encoded" 
-            name="platform_encoded" 
-            step="1" 
-            required
-            placeholder="Ej: 12">
-
-        <label for="genre_encoded">Género codificado</label>
-        <input 
-            type="number" 
-            id="genre_encoded" 
-            name="genre_encoded" 
-            step="1" 
-            required
-            placeholder="Ej: 0">
-
-        <label for="publisher_encoded">Editora codificada</label>
-        <input 
-            type="number" 
-            id="publisher_encoded" 
-            name="publisher_encoded" 
-            step="1" 
-            required
-            placeholder="Ej: 45">
-
-        <label for="critic_score">Puntaje de críticos</label>
-        <input 
-            type="number" 
-            id="critic_score" 
-            name="critic_score" 
-            min="0" 
-            max="100" 
-            step="0.1" 
-            required
-            placeholder="Ej: 82">
-
-        <label for="critic_count">Cantidad de críticas</label>
-        <input 
-            type="number" 
-            id="critic_count" 
-            name="critic_count" 
-            min="0" 
-            step="1" 
-            required
-            placeholder="Ej: 35">
-
-        <label for="user_score">Puntaje de usuarios</label>
-        <input 
-            type="number" 
-            id="user_score" 
-            name="user_score" 
-            min="0" 
-            max="10" 
-            step="0.1" 
-            required
-            placeholder="Ej: 8.2">
-
-        <label for="user_count">Cantidad de reseñas de usuarios</label>
-        <input 
-            type="number" 
-            id="user_count" 
-            name="user_count" 
-            min="0" 
-            step="1" 
-            required
-            placeholder="Ej: 120">
-
-        <label for="has_critic_score">¿Tiene puntaje de críticos?</label>
-        <select id="has_critic_score" name="has_critic_score" required>
-            <option value="">Seleccione una opción</option>
-            <option value="1">Sí</option>
-            <option value="0">No</option>
-        </select>
-
-        <label for="has_user_score">¿Tiene puntaje de usuarios?</label>
-        <select id="has_user_score" name="has_user_score" required>
-            <option value="">Seleccione una opción</option>
-            <option value="1">Sí</option>
-            <option value="0">No</option>
-        </select>
-
-        <button type="submit">Predecir ventas globales</button>
-    </form>
-
-    {% if resultado %}
-        <div class="resultado">
-            <h2>Resultado de la predicción</h2>
-            <p>{{ resultado }}</p>
+            <div class="info-list">
+                <div class="info-item">
+                    <span>01</span>
+                    <p>Seleccione plataforma, género y editora del videojuego.</p>
+                </div>
+                <div class="info-item">
+                    <span>02</span>
+                    <p>Ingrese el año de lanzamiento y las métricas de evaluación.</p>
+                </div>
+                <div class="info-item">
+                    <span>03</span>
+                    <p>El modelo entregará una estimación de ventas globales.</p>
+                </div>
+            </div>
         </div>
-    {% endif %}
 
-    {% if error %}
-        <div class="error">
-            <h2>Error</h2>
-            <p>{{ error }}</p>
+        <div class="prediction-card">
+            <form method="POST" action="{{ url_for('prediccion') }}" class="prediction-form">
+
+                <div class="form-section-title">
+                    <h2>Datos generales del videojuego</h2>
+                    <p>Información principal utilizada por el modelo predictivo.</p>
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="year_of_release">Año de lanzamiento</label>
+                        <input
+                            type="number"
+                            id="year_of_release"
+                            name="year_of_release"
+                            min="1970"
+                            max="2030"
+                            step="1"
+                            required
+                            placeholder="Ej: 2015">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="platform">Plataforma</label>
+                        <select id="platform" name="platform" required>
+                            <option value="">Seleccione una plataforma</option>
+                            {% for platform in opciones.platforms %}
+                                <option value="{{ platform }}">{{ platform }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="genre">Género</label>
+                        <select id="genre" name="genre" required>
+                            <option value="">Seleccione un género</option>
+                            {% for genre in opciones.genres %}
+                                <option value="{{ genre.value }}">{{ genre.label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="publisher">Editora</label>
+                        <select id="publisher" name="publisher" required>
+                            <option value="">Seleccione una editora</option>
+                            {% for publisher in opciones.publishers %}
+                                <option value="{{ publisher }}">{{ publisher }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="form-section-title">
+                    <h2>Evaluaciones y reseñas</h2>
+                    <p>Ingrese las puntuaciones y cantidad de reseñas disponibles.</p>
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="critic_score">Puntaje de críticos</label>
+                        <input
+                            type="number"
+                            id="critic_score"
+                            name="critic_score"
+                            min="0"
+                            max="100"
+                            step="0.1"
+                            required
+                            placeholder="Ej: 82">
+                        <small>Escala de 0 a 100. Si no tiene puntaje, ingrese 0.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="critic_count">Cantidad de críticas</label>
+                        <input
+                            type="number"
+                            id="critic_count"
+                            name="critic_count"
+                            min="0"
+                            step="1"
+                            required
+                            placeholder="Ej: 35">
+                        <small>Cantidad de reseñas realizadas por críticos.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user_score">Puntaje de usuarios</label>
+                        <input
+                            type="number"
+                            id="user_score"
+                            name="user_score"
+                            min="0"
+                            max="10"
+                            step="0.1"
+                            required
+                            placeholder="Ej: 8.2">
+                        <small>Escala de 0 a 10. Si no tiene puntaje, ingrese 0.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user_count">Cantidad de reseñas de usuarios</label>
+                        <input
+                            type="number"
+                            id="user_count"
+                            name="user_count"
+                            min="0"
+                            step="1"
+                            required
+                            placeholder="Ej: 120">
+                        <small>Cantidad de reseñas realizadas por usuarios.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="has_critic_score">¿Tiene puntaje de críticos?</label>
+                        <select id="has_critic_score" name="has_critic_score" required>
+                            <option value="">Seleccione una opción</option>
+                            <option value="1">Sí</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="has_user_score">¿Tiene puntaje de usuarios?</label>
+                        <select id="has_user_score" name="has_user_score" required>
+                            <option value="">Seleccione una opción</option>
+                            <option value="1">Sí</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit">Predecir ventas globales</button>
+                </div>
+            </form>
+
+            {% if resultado %}
+                <div class="resultado">
+                    <h2>Resultado de la predicción</h2>
+                    <p>{{ resultado }}</p>
+                </div>
+            {% endif %}
+
+            {% if error %}
+                <div class="error">
+                    <h2>Error</h2>
+                    <p>{{ error }}</p>
+                </div>
+            {% endif %}
         </div>
-    {% endif %}
+    </div>
 </section>
 {% endblock %}
