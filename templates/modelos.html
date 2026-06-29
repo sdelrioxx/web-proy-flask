@@ -25,7 +25,7 @@
         </div>
         <div class="summary-item">
             <span>Modelo seleccionado</span>
-            <strong>XGBoost</strong>
+            <strong>Gradient Boosting</strong>
         </div>
     </div>
 
@@ -109,18 +109,19 @@
 
         <article class="model-card selected-model">
             <div class="model-badge final-badge">Modelo C</div>
-            <h2>XGBoost</h2>
+            <h2>Gradient Boosting</h2>
 
             <p>
-                Modelo de gradient boosting basado en árboles. Construye modelos de forma
-                secuencial, corrigiendo los errores de los árboles anteriores.
+                Modelo de boosting basado en árboles de decisión. Construye modelos de forma
+                secuencial, donde cada nuevo árbol intenta corregir los errores cometidos
+                por los árboles anteriores.
             </p>
 
             <div class="model-detail">
                 <h3>Rol dentro del análisis</h3>
                 <p>
-                    Fue el modelo con mejor desempeño general, obteniendo el menor error
-                    y el mayor R² en el conjunto de prueba. Por esta razón, fue seleccionado
+                    Fue el modelo con mejor desempeño general dentro de la versión actualizada.
+                    Obtuvo el mayor R² en el conjunto de prueba, por lo que fue seleccionado
                     como modelo final para la aplicación web.
                 </p>
             </div>
@@ -128,20 +129,20 @@
             <div class="metrics-grid">
                 <div class="metric-box">
                     <span>RMSE</span>
-                    <strong>0.2800</strong>
+                    <strong>0.2820</strong>
                 </div>
                 <div class="metric-box">
                     <span>MAE</span>
-                    <strong>0.1708</strong>
+                    <strong>0.1709</strong>
                 </div>
                 <div class="metric-box">
                     <span>R²</span>
-                    <strong>0.5250</strong>
+                    <strong>0.5180</strong>
                 </div>
             </div>
 
             <p class="cv-text">
-                Validación cruzada R²: 0.5276 ± 0.0109
+                Modelo final utilizado en la predicción web
             </p>
         </article>
 
@@ -177,11 +178,11 @@
                         <td>Mejora relevante al capturar relaciones no lineales.</td>
                     </tr>
                     <tr class="best-row">
-                        <td>XGBoost</td>
-                        <td>0.2800</td>
-                        <td>0.1708</td>
-                        <td>0.5250</td>
-                        <td>Mejor desempeño, seleccionado como modelo final.</td>
+                        <td>Gradient Boosting</td>
+                        <td>0.2820</td>
+                        <td>0.1709</td>
+                        <td>0.5180</td>
+                        <td>Mejor desempeño en la versión actualizada, seleccionado como modelo final.</td>
                     </tr>
                 </tbody>
             </table>
@@ -189,19 +190,21 @@
     </div>
 
     <div class="final-model-card">
-        <h2>Modelo Final Seleccionado: XGBoost</h2>
+        <h2>Modelo Final Seleccionado: Gradient Boosting</h2>
 
         <p>
-            El modelo seleccionado para la aplicación fue XGBoost, ya que obtuvo el mejor
-            desempeño en las métricas evaluadas. En comparación con los otros modelos,
-            presentó el menor RMSE, el menor MAE y el mayor R², lo que indica una mejor
-            capacidad para aproximar las ventas globales de videojuegos.
+            El modelo seleccionado para la aplicación fue Gradient Boosting, ya que obtuvo
+            el mejor desempeño dentro de la comparación realizada en la versión actualizada
+            del proyecto. En particular, presentó el mayor R² en el conjunto de prueba y
+            un menor error respecto a los modelos candidatos.
         </p>
 
         <p>
-            Además, XGBoost es adecuado para este problema porque puede capturar relaciones
+            Este modelo es adecuado para el problema porque permite capturar relaciones
             no lineales entre las variables del mercado de videojuegos, como la plataforma,
             el género, la editora, el año de lanzamiento y las puntuaciones de crítica y usuarios.
+            Además, al trabajar de forma secuencial, mejora progresivamente la predicción
+            corrigiendo errores de modelos anteriores.
         </p>
     </div>
 
